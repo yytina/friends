@@ -1,0 +1,8 @@
+Thank you for registering with friends! To complete your registration, please follow the link below:
+
+<%= @host %>/register/<%= @registrant.id %>
+
+If you received this email in error, simply do nothing. The above link will expire at <%= @registrant.expires_at.strftime("%-I:%M on %a, %-d %b %Y") %>.
+
+Thanks!
+friends

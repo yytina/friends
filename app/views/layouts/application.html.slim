@@ -1,0 +1,30 @@
+doctype html
+html lang="en"
+  head
+    meta charset="utf-8"
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    
+    title friends
+    
+    = csrf_meta_tags
+    
+    = stylesheet_link_tag "application", media: "all"
+    = javascript_include_tag "application"
+  body
+    #wrap
+      - if current_user
+        == render partial: 'layouts/navigation'
+      - else
+        == render partial: 'layouts/header'
+    
+      .container
+        .page
+          == yield
+          
+    #footer
+      .container
+        p.text-muted.credit
+          => link_to "Privacy Policy", privacy_url
+          ' •
+          => link_to "Terms of Use", terms_url
+          ' • © 2013 friends
