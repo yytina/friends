@@ -32,8 +32,8 @@ Friends::Application.configure do
     :address              => "smtp.gmail.com",
     :port                => 587,
     :domain              => 'gmail.com',
-    :user_name            => 'friendsJustMade',
-    :password            => 'friends1234',
+    :user_name            => 'user_name',
+    :password            => 'password',
     :authentication      => 'plain',
     :enable_starttls_auto => true
   }
