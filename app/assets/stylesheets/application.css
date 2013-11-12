@@ -10,7 +10,9 @@ body {
   height: 100%;
   background-color: #fff;
 }
-
+.colorOrange{
+  color: #DB5B2A ;
+}
 h1, caption {
   font-size: 160%;
   text-align: left;
@@ -26,6 +28,52 @@ h2, legend {
   border-bottom: 1px solid #5cb85c;
 }
 
+.pie {
+    position:absolute;
+    background-color:red;
+    width:200px;
+    height:200px;
+    -moz-border-radius:100px;
+    -webkit-border-radius:100px;
+    border-radius:100px;
+    clip:rect(0px,100px,200px,0px);
+}
+.hold {
+  position:absolute;
+  width:200px;
+  height:200px;
+  clip:rect(0px,200px,200px,100px);
+}
+
+
+#registrant-email {
+  font-size: 1.4em;
+  margin-top: 25px;
+  color: green;
+}
+
+#pw-quality {
+  font-size: 1.2em;
+  margin-top: 25px;
+
+}
+
+.crack-div {
+  font-size: 1.2em;
+  margin-top: -10px;
+
+}
+
+#match-div {
+  font-size: 1.2em;
+  margin-top: 20px;
+  color: red;
+}
+
+#match-div.pmatch {
+  font-weight: bold;
+  color: green;
+}
 /* Wrapper for page content to push down footer */
 #wrap {
   min-height: 100%;

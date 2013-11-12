@@ -3,6 +3,11 @@ class User
   include Mongoid::Timestamps
   
   attr_accessor :password, :password_confirmation
+
+  has_one :profile, dependent: :destroy
+
+  has_many :meetups_as_primary, class_name: "Meetup", inverse_of: :primary
+  has_many :meetups_as_friend, class_name: "Meetup", inverse_of: :friend
   
   field :id, type: String
   

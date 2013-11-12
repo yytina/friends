@@ -1,0 +1,20 @@
+h1 #{current_user.name}'s Search 
+
+.row
+  .col-lg-6.col-lg-offset-3
+    table#users-table.table.table-bordered.table-striped
+      caption Potential Friends!
+      thead
+        tr
+          th Name
+          th Score
+          th Show Profile
+      tbody
+        - @result_profiles.each do |p|
+          tr
+            td #{p[0].name}
+            td #{p[1]}
+            td = link_to "Show", show_profile_url(p[0])
+
+      
+      

@@ -4,9 +4,15 @@
       span.icon-bar
       span.icon-bar
       span.icon-bar
-    = link_to_unless_current "friends", root_url, class: "navbar-brand logo" do
-      span.navbar-brand.logo friends
+    = link_to_unless_current "Friends", root_url, class: "navbar-brand logo" do
+      span.navbar-brand.logo Friends
     .collapse.navbar-collapse
       ul.nav.navbar-nav.pull-right
+        li
+          = link_to "Schedule", user_meetups_url(current_user), class: "schedule-link"   
+        li
+          = link_to "Edit", edit_current_url, class: "edit-link"
+        li
+          = link_to "Search", search_profiles_url, class: "search-link"
         li
           = link_to "Sign out", logout_url, method: :delete, class: "logout-link"

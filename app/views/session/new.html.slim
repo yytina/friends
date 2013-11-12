@@ -25,14 +25,11 @@
 javascript:
   $(function() {
   
-    $('.login-options li a').on('click', function(e) {
-      var elem = $(this)[0];
-      var id = elem.id;
-      
-      $('.login-options li').removeClass('active');
-      $(elem.parentNode).addClass('active');
-      
-      switch (id) {
+    $('.login-options').children('li').children('a').on('click', function(e) {
+      $('.login-options').find('li').removeClass('active');
+      $(this).parent().addClass('active');
+
+      switch ($(this).attr('id')) {
         case 'register-pill':
           $('legend').html('Please enter your email');
           $('#password-label').hide();

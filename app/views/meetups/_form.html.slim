@@ -1,0 +1,20 @@
+p Meet Up Request by
+= form_for [@user, @meetup] do |f|
+  p
+    = f.label :meetup_at
+    br
+    = f.datetime_select :meetup_at
+  p
+    = f.label :Place
+    br
+    = f.text_field :place
+  p
+    = f.label :Coffee
+    br
+    = f.check_box :is_coffee
+  p
+    = f.label :Beer
+    br
+    = f.check_box :is_beer
+  p
+    = f.submit

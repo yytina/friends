@@ -1,0 +1,21 @@
+
+.nested-fields
+  .field
+    = f.label :keyword, "Keyword"
+    br
+    = f.text_field :keyword
+    br
+    = f.label :weight, "Weight"
+    br
+    = f.text_field :weight
+    br
+    = f.label :thoughts, "Thoughts"
+    br
+    = f.text_area :thoughts, :cols => "50", :rows => "3"
+    br
+    = f.label :questions, "Questions"
+    br
+    = f.text_area :questions, :cols => "50", :rows => "3"
+    br
+    
+  = link_to_remove_association "remove", f, class: "btn btn-danger"

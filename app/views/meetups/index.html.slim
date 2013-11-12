@@ -1,0 +1,107 @@
+h1 Meetups
+
+.row
+  .col-lg-8.col-lg-offset-2
+    table#meetups-table.table.table-bordered.table-striped
+      caption Schedules! Today #{@today} 
+      thead
+        tr
+          th Mon
+          th Tue
+          th Wed
+          th Thu
+          th Fri
+          th Sat
+          th Sun
+      tbody
+        tr
+        - for i in 0..6
+          td 
+            span  #{@calendarD[i]} 
+            - if @event[i]!=[]
+              - case @event[i][2]
+              - when "Agreed"
+                - classLabel="label label-success"
+              - when "Respond"
+                - classLabel="label label-warning"
+              - else
+                - classLabel="label label-default"
+              = link_to @event[i][0], user_meetup_url(@current_user, @event[i][1]), class:classLabel
+              span #{@event[i][2]}
+        end
+
+        tr
+         - for i in 7..13
+          td 
+            span  #{@calendarD[i]} 
+            - if @event[i]!=[]
+              - case @event[i][2]
+              - when "Agreed"
+                - classLabel="label label-success"
+              - when "Respond"
+                - classLabel="label label-warning"
+              - else
+                - classLabel="label label-default"
+              = link_to @event[i][0], user_meetup_url(@current_user, @event[i][1]), class:classLabel
+              span #{@event[i][2]}
+        end
+      
+
+
+
+h1 Primary meetup
+table 
+  - @meetupsP.each do |p|
+    tr
+      td style="width: 40%" With #{p.friend.name}
+      td style="width: 20%"= link_to "Show", user_meetup_url(@current_user, p)
+      td style="width: 20%"= link_to "Edit", edit_user_meetup_url(@current_user,p)
+      td = link_to "Delete", user_meetup_url(@current_user,p), method: :delete, confirm: "Are you sure?"
+h1 Friend meetup
+table 
+  - @meetupsF.each do |p|
+    tr
+      td style="width: 40%" From #{p.primary.name}
+      td style="width: 20%"= link_to "Show", user_meetup_url(@current_user, p)
+      td style="width: 20%"= link_to "Edit", edit_user_meetup_url(@current_user,p)
+      /td = link_to "Delete", user_meetups_url(@current_user,p), method: :delete, confirm: "Are you sure?"
+
+javascript:
+  $(function() {
+   // $('#meetups-table.table').hide();
+   	
+    $('#users-table').find('.keyword').on('click', function(e) { 
+      e.preventDefault();
+      //console.log($(this).html());/
+      $(this).addClass('colorOrange');
+      //console.log("$(this).attr('data-name'):"+ $(this).attr('data-name'));
+      var profile_id = $(this).data("profile-id");
+      var subject_id = $(this).data("subject-id");
+
+      $('#details-table').show();
+       $.ajax({
+        url: "/api/profiles/" + profile_id+ "/subjects/" + subject_id,
+        method: "GET",
+        dataType: "json",
+        
+        success: function(data) {
+          var thoughtD = $('#thoughts');
+          var thoughtLen = data.thoughts.length;
+          var questionD = $('#questions');
+          var questionLen = data.questions.length;
+          
+          for (var i = 0; i < thoughtLen; i++) {
+            thoughtD.empty();
+            thoughtD.append('<li>' + data.thoughts[i]+'</li>');
+          }
+          for (var i = 0; i < questionLen; i++) {          
+            questionD.empty();
+            questionD.append('<li>' + data.questions[i]+'</li>');
+          }
+        }
+      });
+
+    });
+
+  
+  });

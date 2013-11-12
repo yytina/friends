@@ -1,0 +1,107 @@
+h1 = @profile.name
+
+
+
+.row
+  .col-lg-8.col-lg-offset-2
+    .row
+      .col-lg-8
+        canvas#myChart width="350" height="350"
+      .col-lg-4
+        table#users-table.table.table-bordered.table-striped
+          caption 
+          thead
+            tr
+              th Subject
+              th Weight
+          tbody
+            - @profile.subjects.each do |subject|
+              tr
+                td
+                	a.keyword data-profile-id=@profile.id data-subject-id= subject.id href="" #{subject.keyword}
+                td.subject-weight data-weight=subject.weight #{subject.weight}
+        - if current_user.profile!=@profile 
+          button= link_to "Meet Up", new_user_meetup_url(@profile.user)
+          br
+          br
+          button= link_to "Back", search_profiles_url, class: "search-link"
+.row
+  .col-lg-8.col-lg-offset-2
+    table#details-table.table.table-bordered.table-striped
+      tbody
+          tr
+            td Thoughts
+            td 
+            	ul#thoughts
+          tr
+            td Questions
+            td 
+            	ul#questions
+            		
+javascript:
+  $(function() {
+    var ctx = document.getElementById("myChart").getContext("2d");
+    var colors = ["rgb(201,125,96)","#336699","rgb(184,201,96)", "#996633","rgb(96,201,96)"];
+    var chartData = [];
+
+    $('.subject-weight').each(function(index, element) {
+      chartData.push({
+        value: parseInt($(this).data("weight")),    
+        color: colors[index]
+      });
+
+      $(this).css("background-color", colors[index]);
+    });
+
+    new Chart(ctx).Pie(chartData);
+    $('#details-table').hide();
+    $('#users-table').find('.keyword').on('click', function(e) { 
+      e.preventDefault();
+      //console.log($(this).html());/
+      $(this).addClass('colorOrange');
+      //console.log("$(this).attr('data-name'):"+ $(this).attr('data-name'));
+      var profile_id = $(this).data("profile-id");
+      var subject_id = $(this).data("subject-id");
+
+      $('#details-table').show();
+       $.ajax({
+        url: "/api/profiles/" + profile_id+ "/subjects/" + subject_id,
+        method: "GET",
+        dataType: "json",
+        
+        success: function(data) {
+          console.log("data", data);
+          var thoughtD = $('#thoughts');
+          var questionD = $('#questions');
+          
+          var thoughtArray=data.thoughts.split(".");
+          var thoughtLen = thoughtArray.length;
+          var questionArray=data.questions.split("?");
+          var questionLen = questionArray.length;
+
+          console.log('thought', thoughtArray[0]);
+          console.log('question', questionArray[0]);
+          thoughtD.empty();
+
+           for (var i = 0; i < thoughtLen-1; i++) {
+            
+            thoughtD.append('<li>' + thoughtArray[i] + '.' + '</li>');
+            console.log('test th', thoughtArray[i]);
+          }
+
+          questionD.empty();
+          for (var i = 0; i < questionLen-1; i++) {          
+            
+            questionD.append('<li>' + questionArray[i]+'?'+'</li>');
+            console.log('test th', questionArray[i]);
+          }
+          
+        }
+      });
+
+    });
+
+  
+  });
+
+

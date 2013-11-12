@@ -1,0 +1,36 @@
+
+.row
+  .col-lg-6.col-lg-offset
+    table#users-table.table.table-bordered.table-striped
+      caption Meetup Details
+      tbody
+        tr
+          td
+            strong Time
+          td = @meetup.meetup_at.strftime('%I:%M%p %a %d %b %Y')
+        tr
+          td
+            strong Place
+          td = @meetup.place
+        tr
+          td
+            strong Type
+          td #{ @meetup.is_coffee ? "Coffee" : "Beer" }
+        tr
+          td
+            strong Friend
+          td #{ @meetup.primary==current_user ? "Invitation To "+@meetup.friend.name : "Invitation From "+@meetup.primary.name }
+        tr
+          td
+            strong Status
+          td.status #{ @meetup.acceptStatus ? "Accepted" : "Pending" }
+
+
+- if (!@meetup.acceptStatus)&&(@meetup.friend==current_user)
+  = form_for [current_user, @meetup], url: accept_meetup_path(current_user, @meetup) do |f|
+    p
+      = f.submit "Accept", id: "accept-button", class: "btn btn-success"
+/button#accept-button.btn.btn-success
+
+
+

@@ -1,0 +1,11 @@
+h1 Edit #{@profile.name}'s profile
+= form_for @profile, url: "/profile/#{@profile.id}" do |f|
+  .subjectInput
+    = f.fields_for :subjects, @profile.subjects do |subject_form|
+      = render 'subject_fields', :f => subject_form
+    .links
+      = link_to_add_association 'add subject', f, :subjects
+    = f.submit
+
+
+

@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-friends::Application.load_tasks
+Friends::Application.load_tasks

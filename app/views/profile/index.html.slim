@@ -1,0 +1,11 @@
+h1 Profiles
+
+table
+  - @profiles.each do |p|
+    tr
+      td style="width: 80%" #{p.name}
+      td = link_to "Show", show_profile_url(p)
+      td = link_to "Edit", edit_profile_url(p)
+      td = link_to "Delete", profile_url(p), method: :delete, confirm: "Are you sure?"
+      
+      

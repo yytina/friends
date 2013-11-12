@@ -4,7 +4,7 @@ html lang="en"
     meta charset="utf-8"
     meta name="viewport" content="width=device-width, initial-scale=1.0"
     
-    title friends
+    title Friends
     
     = csrf_meta_tags
     
@@ -27,4 +27,7 @@ html lang="en"
           => link_to "Privacy Policy", privacy_url
           ' •
           => link_to "Terms of Use", terms_url
-          ' • © 2013 friends
+          ' • © 2013 Friends
+
+    == render partial: 'layouts/messages'
+

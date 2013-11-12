@@ -10,6 +10,7 @@ gem 'bcrypt-ruby', require: 'bcrypt'
 
 gem 'bson_ext'
 gem 'mongoid', github: 'mongoid/mongoid', ref: 'f91feef'
+gem "cocoon"
 
 group :development, :test do
   gem 'launchy'
